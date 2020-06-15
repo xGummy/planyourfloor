@@ -1,5 +1,6 @@
 module ViewControls exposing (..)
 
+import Html exposing (Html)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Input as Input
@@ -10,9 +11,9 @@ type alias Msg =
     RoomInfo.Msg
 
 
-controls : RoomInfo -> Element Msg
+controls : RoomInfo -> Html Msg
 controls { direction } =
-    column
+    layout [] <| column
         [ height fill
         , width <| px 300
         , Background.color <| rgb255 240 240 240

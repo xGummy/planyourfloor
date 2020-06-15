@@ -1,9 +1,9 @@
 module Main exposing (..)
 
 import Browser
-import Element
 import Floor exposing (Floor)
 import Html exposing (Html)
+import Html.Attributes exposing (class)
 import IntField exposing (IntField)
 import RoomInfo exposing (RoomInfo)
 import ViewFloor
@@ -102,10 +102,8 @@ subscriptions _ =
 
 view : Model -> Html Msg
 view model =
-    Element.layout []
-        (Element.column [ Element.width Element.fill ]
-            [ ViewHeader.header
+            Html.div [class "page-container"][
+              ViewHeader.header
             , ViewInputs.info model.roomInfo
             , ViewFloor.floor model.floor model.roomInfo
             ]
-        )

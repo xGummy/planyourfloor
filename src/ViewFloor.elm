@@ -1,11 +1,9 @@
 module ViewFloor exposing (..)
 
 import Boards exposing (Board, Boards)
-import Css as C
-import Element exposing (..)
-import Element.Background as Background
+import Html.Attributes as A
 import Floor exposing (Floor)
-import Html.Styled exposing (Html)
+import Html as Html exposing (Html)
 import RoomInfo exposing (RoomInfo)
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as S
@@ -16,31 +14,25 @@ type alias Msg =
     RoomInfo.Msg
 
 
-floor : Floor -> RoomInfo -> Element Msg
+floor : Floor -> RoomInfo -> Html Msg
 floor f roomInfo =
-    row
-        [ width fill
-        , height <| px 900
-        ]
+    (Html.div
+        [ A.class "main"]
         [ ViewControls.controls roomInfo
         , viewSvg f
-        ]
+        ])
 
 
-viewSvg : Floor -> Element Msg
+viewSvg : Floor -> Html Msg
 viewSvg f =
-    column
-        [ width <| px 900
-        , height fill
-        , centerX
-        , centerY
-        ]
-        [ html <| Svg.toUnstyled (drawFloor f) ]
+    Html.div
+        [ A.class "floor"]
+        [ drawFloor f ]
 
 
 drawFloor : Floor -> Html Msg
 drawFloor f =
-    Svg.svg
+    Svg.toUnstyled <| Svg.svg
         [ S.width "900px"
         , S.height "900px"
         , S.viewBox "0 0 900 900"
@@ -54,7 +46,7 @@ drawFloor f =
             ++ drawLabels f.labels
 
 
-drawRoom : Floor.FloorPlan -> Svg.Svg msg
+drawRoom : Floor.FloorPlan -> Svg.Svg Msg
 drawRoom f =
     Svg.rect
         [ S.x <| toPercentString f.offsetX
@@ -68,7 +60,7 @@ drawRoom f =
         []
 
 
-drawLabels : Floor.Labels -> List (Svg.Svg msg)
+drawLabels : Floor.Labels -> List (Svg.Svg Msg)
 drawLabels f =
     [ Svg.text_
         [ S.x "50%"
@@ -170,7 +162,6 @@ drawBoard board acc =
                 , S.strokeWidth "1"
                 , S.stroke "black"
                 , S.fill "#c48d58"
-                , S.css [ C.hover [ C.fill <| C.hex "bf864e " ] ]
                 , S.class "data-tooltip"
                 ]
                 [ Svg.title [] [ Svg.text titleString ] ]
