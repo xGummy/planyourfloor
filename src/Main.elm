@@ -3,12 +3,13 @@ module Main exposing (..)
 import Browser
 import Floor exposing (Floor)
 import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, src, alt)
 import IntField exposing (IntField)
 import RoomInfo exposing (RoomInfo)
 import ViewFloor
 import ViewHeader
 import ViewInputs
+import ViewControls
 
 
 main =
@@ -104,6 +105,12 @@ view : Model -> Html Msg
 view model =
             Html.div [class "page-container"][
               ViewHeader.header
-            , ViewInputs.info model.roomInfo
+              , Html.div [class "main-content"]
+              [
+               Html.div [class "side-panel"] [
+                ViewInputs.info model.roomInfo
+        , Html.div [class "direction-panel"] [ Html.img [src "src/img/compass.png", alt "direction"][], ViewControls.controls model.roomInfo]
+              ]
             , ViewFloor.floor model.floor model.roomInfo
+              ]
             ]

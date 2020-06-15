@@ -7,7 +7,6 @@ import Html as Html exposing (Html)
 import RoomInfo exposing (RoomInfo)
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as S
-import ViewControls
 
 
 type alias Msg =
@@ -18,9 +17,7 @@ floor : Floor -> RoomInfo -> Html Msg
 floor f roomInfo =
     (Html.div
         [ A.class "main"]
-        [ ViewControls.controls roomInfo
-        , viewSvg f
-        ])
+        [ viewSvg f ])
 
 
 viewSvg : Floor -> Html Msg
@@ -33,9 +30,9 @@ viewSvg f =
 drawFloor : Floor -> Html Msg
 drawFloor f =
     Svg.toUnstyled <| Svg.svg
-        [ S.width "900px"
-        , S.height "900px"
-        , S.viewBox "0 0 900 900"
+        [ S.width "700px"
+        , S.height "700px"
+        , S.viewBox "0 0 700 700"
         , S.class "m-3 border border-dark"
         ]
     <|
@@ -176,4 +173,4 @@ getTransForm direction floorPlan =
             ""
 
         RoomInfo.Horizontal ->
-            "rotate(90 450 450)"
+            "rotate(90 350 350)"

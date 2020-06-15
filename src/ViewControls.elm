@@ -13,20 +13,15 @@ type alias Msg =
 
 controls : RoomInfo -> Html Msg
 controls { direction } =
-    layout [] <| column
-        [ height fill
-        , width <| px 300
-        , Background.color <| rgb255 240 240 240
-        ]
-        [ selectDirection direction ]
+    layout [] <| el
+        [ ]
+        ( selectDirection direction )
 
 
 selectDirection : RoomInfo.Direction -> Element Msg
 selectDirection s =
-    Input.radioRow
-        [ padding 10
-        , spacing 20
-        ]
+    Input.radio
+        []
         { onChange = RoomInfo.ChangeDirection
         , selected = Just s
         , label = Input.labelAbove [] (text "Direction")

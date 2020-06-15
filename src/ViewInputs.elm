@@ -39,7 +39,7 @@ floorPlan roomInfo title img =
 floorImage : Input -> String -> Html Msg
 floorImage title img =
     Html.div
-        [ class "imput-image" ]
+        [ class "input-image" ]
         [ Html.img [src img, alt <| inputToString title][]]
 
 
