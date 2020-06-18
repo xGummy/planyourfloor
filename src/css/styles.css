@@ -92,3 +92,12 @@
   font-size: 20px;
   margin: 0;
 }
+
+.floor {
+  border: 2px solid #d7ebba;
+  border-radius: 5px;
+}
+
+.board:hover {
+  fill: #ebd494;
+}

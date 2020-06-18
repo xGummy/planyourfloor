@@ -157,9 +157,9 @@ drawBoard board acc =
                 , S.width <| toPercentString (acc.relFactor * toFloat wid)
                 , S.height <| toPercentString (acc.relFactor * toFloat len)
                 , S.strokeWidth "1"
-                , S.stroke "black"
+                , S.stroke "#ffdcba"
                 , S.fill "#c48d58"
-                , S.class "data-tooltip"
+                , S.class "data-tooltip board"
                 ]
                 [ Svg.title [] [ Svg.text titleString ] ]
     in

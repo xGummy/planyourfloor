@@ -109,7 +109,7 @@ view model =
               [
                Html.div [class "side-panel"] [
                 ViewInputs.info model.roomInfo
-        , Html.div [class "direction-panel"] [ Html.img [src "src/img/compass.png", alt "direction"][], ViewControls.controls model.roomInfo]
+        , ViewControls.controls model.roomInfo
               ]
             , ViewFloor.floor model.floor model.roomInfo
               ]

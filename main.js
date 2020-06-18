@@ -5498,8 +5498,12 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
-var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 'AlignX', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
+var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
@@ -11057,6 +11061,63 @@ var $mdgriffith$elm_ui$Element$el = F2(
 				_List_fromArray(
 					[child])));
 	});
+var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
+	function (a, b) {
+		return {$: 'FontFamily', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Model$StyleClass = F2(
+	function (a, b) {
+		return {$: 'StyleClass', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$fontFamily = $mdgriffith$elm_ui$Internal$Flag$flag(5);
+var $elm$core$String$toLower = _String_toLower;
+var $elm$core$String$words = _String_words;
+var $mdgriffith$elm_ui$Internal$Model$renderFontClassName = F2(
+	function (font, current) {
+		return _Utils_ap(
+			current,
+			function () {
+				switch (font.$) {
+					case 'Serif':
+						return 'serif';
+					case 'SansSerif':
+						return 'sans-serif';
+					case 'Monospace':
+						return 'monospace';
+					case 'Typeface':
+						var name = font.a;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+					case 'ImportFont':
+						var name = font.a;
+						var url = font.b;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+					default:
+						var name = font.a.name;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+				}
+			}());
+	});
+var $mdgriffith$elm_ui$Element$Font$family = function (families) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontFamily,
+		A2(
+			$mdgriffith$elm_ui$Internal$Model$FontFamily,
+			A3($elm$core$List$foldl, $mdgriffith$elm_ui$Internal$Model$renderFontClassName, 'ff-', families),
+			families));
+};
 var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
 	return {$: 'Attr', a: a};
 };
@@ -11216,24 +11277,15 @@ var $mdgriffith$elm_ui$Internal$Model$Colored = F3(
 	function (a, b, c) {
 		return {$: 'Colored', a: a, b: b, c: c};
 	});
-var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
-	function (a, b) {
-		return {$: 'FontFamily', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
 	return {$: 'FontSize', a: a};
 };
 var $mdgriffith$elm_ui$Internal$Model$SansSerif = {$: 'SansSerif'};
-var $mdgriffith$elm_ui$Internal$Model$StyleClass = F2(
-	function (a, b) {
-		return {$: 'StyleClass', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Model$Typeface = function (a) {
 	return {$: 'Typeface', a: a};
 };
 var $mdgriffith$elm_ui$Internal$Flag$bgColor = $mdgriffith$elm_ui$Internal$Flag$flag(8);
 var $mdgriffith$elm_ui$Internal$Flag$fontColor = $mdgriffith$elm_ui$Internal$Flag$flag(14);
-var $mdgriffith$elm_ui$Internal$Flag$fontFamily = $mdgriffith$elm_ui$Internal$Flag$flag(5);
 var $mdgriffith$elm_ui$Internal$Flag$fontSize = $mdgriffith$elm_ui$Internal$Flag$flag(4);
 var $mdgriffith$elm_ui$Internal$Model$formatColorClass = function (_v0) {
 	var red = _v0.a;
@@ -11242,45 +11294,6 @@ var $mdgriffith$elm_ui$Internal$Model$formatColorClass = function (_v0) {
 	var alpha = _v0.d;
 	return $mdgriffith$elm_ui$Internal$Model$floatClass(red) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(green) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(blue) + ('-' + $mdgriffith$elm_ui$Internal$Model$floatClass(alpha))))));
 };
-var $elm$core$String$toLower = _String_toLower;
-var $elm$core$String$words = _String_words;
-var $mdgriffith$elm_ui$Internal$Model$renderFontClassName = F2(
-	function (font, current) {
-		return _Utils_ap(
-			current,
-			function () {
-				switch (font.$) {
-					case 'Serif':
-						return 'serif';
-					case 'SansSerif':
-						return 'sans-serif';
-					case 'Monospace':
-						return 'monospace';
-					case 'Typeface':
-						var name = font.a;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-					case 'ImportFont':
-						var name = font.a;
-						var url = font.b;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-					default:
-						var name = font.a.name;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-				}
-			}());
-	});
 var $mdgriffith$elm_ui$Internal$Model$rootStyle = function () {
 	var families = _List_fromArray(
 		[
@@ -11341,6 +11354,7 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
+var $mdgriffith$elm_ui$Element$Font$sansSerif = $mdgriffith$elm_ui$Internal$Model$SansSerif;
 var $author$project$RoomInfo$ChangeDirection = function (a) {
 	return {$: 'ChangeDirection', a: a};
 };
@@ -11356,9 +11370,6 @@ var $mdgriffith$elm_ui$Element$Input$Option = F2(
 		return {$: 'Option', a: a, b: b};
 	});
 var $mdgriffith$elm_ui$Internal$Model$NoAttribute = {$: 'NoAttribute'};
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 'AlignX', a: a};
-};
 var $mdgriffith$elm_ui$Internal$Model$Left = {$: 'Left'};
 var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Left);
 var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
@@ -11533,7 +11544,24 @@ var $mdgriffith$elm_ui$Element$Input$option = F2(
 			val,
 			$mdgriffith$elm_ui$Element$Input$defaultRadioOption(txt));
 	});
-var $mdgriffith$elm_ui$Element$Input$Column = {$: 'Column'};
+var $mdgriffith$elm_ui$Internal$Model$PaddingStyle = F5(
+	function (a, b, c, d, e) {
+		return {$: 'PaddingStyle', a: a, b: b, c: c, d: d, e: e};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$padding = $mdgriffith$elm_ui$Internal$Flag$flag(2);
+var $mdgriffith$elm_ui$Element$padding = function (x) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			'p-' + $elm$core$String$fromInt(x),
+			x,
+			x,
+			x,
+			x));
+};
+var $mdgriffith$elm_ui$Element$Input$Row = {$: 'Row'};
 var $mdgriffith$elm_ui$Element$Input$AfterFound = {$: 'AfterFound'};
 var $mdgriffith$elm_ui$Element$Input$BeforeFound = {$: 'BeforeFound'};
 var $mdgriffith$elm_ui$Element$Input$Idle = {$: 'Idle'};
@@ -11981,7 +12009,7 @@ var $mdgriffith$elm_ui$Element$Input$radioHelper = F3(
 			input.label,
 			optionArea);
 	});
-var $mdgriffith$elm_ui$Element$Input$radio = $mdgriffith$elm_ui$Element$Input$radioHelper($mdgriffith$elm_ui$Element$Input$Column);
+var $mdgriffith$elm_ui$Element$Input$radioRow = $mdgriffith$elm_ui$Element$Input$radioHelper($mdgriffith$elm_ui$Element$Input$Row);
 var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 	return {$: 'Text', a: a};
 };
@@ -11990,13 +12018,17 @@ var $mdgriffith$elm_ui$Element$text = function (content) {
 };
 var $author$project$ViewControls$selectDirection = function (s) {
 	return A2(
-		$mdgriffith$elm_ui$Element$Input$radio,
-		_List_Nil,
+		$mdgriffith$elm_ui$Element$Input$radioRow,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$padding(10),
+				$mdgriffith$elm_ui$Element$spacing(20)
+			]),
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
 				_List_Nil,
-				$mdgriffith$elm_ui$Element$text('Direction')),
+				$mdgriffith$elm_ui$Element$text('')),
 			onChange: $author$project$RoomInfo$ChangeDirection,
 			options: _List_fromArray(
 				[
@@ -12012,6 +12044,13 @@ var $author$project$ViewControls$selectDirection = function (s) {
 			selected: $elm$core$Maybe$Just(s)
 		});
 };
+var $mdgriffith$elm_ui$Element$Font$size = function (i) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontSize,
+		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
+var $mdgriffith$elm_ui$Element$Font$typeface = $mdgriffith$elm_ui$Internal$Model$Typeface;
 var $author$project$ViewControls$controls = function (_v0) {
 	var direction = _v0.direction;
 	return A2(
@@ -12019,7 +12058,17 @@ var $author$project$ViewControls$controls = function (_v0) {
 		_List_Nil,
 		A2(
 			$mdgriffith$elm_ui$Element$el,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$size(18),
+					$mdgriffith$elm_ui$Element$Font$family(
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$typeface('Open Sans'),
+							$mdgriffith$elm_ui$Element$Font$sansSerif
+						])),
+					$mdgriffith$elm_ui$Element$centerX
+				]),
 			$author$project$ViewControls$selectDirection(direction)));
 };
 var $rtfeldman$elm_css$VirtualDom$Styled$Attribute = F3(
@@ -12114,9 +12163,9 @@ var $author$project$ViewFloor$drawBoard = F2(
 					$rtfeldman$elm_css$Svg$Styled$Attributes$height(
 					$author$project$ViewFloor$toPercentString(acc.relFactor * len)),
 					$rtfeldman$elm_css$Svg$Styled$Attributes$strokeWidth('1'),
-					$rtfeldman$elm_css$Svg$Styled$Attributes$stroke('black'),
+					$rtfeldman$elm_css$Svg$Styled$Attributes$stroke('#ffdcba'),
 					$rtfeldman$elm_css$Svg$Styled$Attributes$fill('#c48d58'),
-					$rtfeldman$elm_css$Svg$Styled$Attributes$class('data-tooltip')
+					$rtfeldman$elm_css$Svg$Styled$Attributes$class('data-tooltip board')
 				]),
 			_List_fromArray(
 				[
@@ -12221,7 +12270,7 @@ var $author$project$ViewFloor$getTransForm = F2(
 		if (direction.$ === 'Vertical') {
 			return '';
 		} else {
-			return 'rotate(90 400 400)';
+			return 'rotate(90 350 350)';
 		}
 	});
 var $rtfeldman$elm_css$Svg$Styled$svg = $rtfeldman$elm_css$Svg$Styled$node('svg');
@@ -14340,9 +14389,9 @@ var $author$project$ViewFloor$drawFloor = function (f) {
 			$rtfeldman$elm_css$Svg$Styled$svg,
 			_List_fromArray(
 				[
-					$rtfeldman$elm_css$Svg$Styled$Attributes$width('800px'),
-					$rtfeldman$elm_css$Svg$Styled$Attributes$height('800px'),
-					$rtfeldman$elm_css$Svg$Styled$Attributes$viewBox('0 0 800 800'),
+					$rtfeldman$elm_css$Svg$Styled$Attributes$width('700px'),
+					$rtfeldman$elm_css$Svg$Styled$Attributes$height('700px'),
+					$rtfeldman$elm_css$Svg$Styled$Attributes$viewBox('0 0 700 700'),
 					$rtfeldman$elm_css$Svg$Styled$Attributes$class('m-3 border border-dark')
 				]),
 			_Utils_ap(
@@ -14389,6 +14438,7 @@ var $author$project$ViewFloor$floor = F2(
 					$author$project$ViewFloor$viewSvg(f)
 				]));
 	});
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -14624,24 +14674,7 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$author$project$ViewInputs$info(model.roomInfo),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('direction-panel')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$img,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$src('src/img/compass.png'),
-												$elm$html$Html$Attributes$alt('direction')
-											]),
-										_List_Nil),
-										$author$project$ViewControls$controls(model.roomInfo)
-									]))
+								$author$project$ViewControls$controls(model.roomInfo)
 							])),
 						A2($author$project$ViewFloor$floor, model.floor, model.roomInfo)
 					]))
